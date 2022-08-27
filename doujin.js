@@ -10,7 +10,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/",(req,res) => {
     const targetimagdir = fs.readdirSync("./public/images/");
     let currentWorkingDirectory = process.cwd();
-    console.log("カレントディレクトリ" + currentWorkingDirectory);
 
     if(targetimagdir.length >= 0)
     {
@@ -31,14 +30,11 @@ app.get("/",(req,res) => {
 app.get("/book",(req,res) => {
 
     const title = req.query.title;
-    console.log(title);
     const targetimagdir = fs.readdirSync("./public/images/" + title);
-    let currentWorkingDirectory = process.cwd();
-    console.log("カレントディレクトリ" + currentWorkingDirectory);
+
     if(targetimagdir.length >= 0)
     {
         const targetimags = targetimagdir.map((imagedir) => "./images/" + title + "/" + imagedir);
-        console.log(targetimags);
 
         res.render("book.ejs",
         {
